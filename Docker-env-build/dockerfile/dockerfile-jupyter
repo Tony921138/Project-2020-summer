@@ -1,4 +1,4 @@
 FROM jupyter/datascience-notebook
 
 RUN pip install --upgrade pip
-RUN pip install pymongo requests bs4 kafka pyspark
+RUN pip install pymongo requests bs4 kafka pyspark boto3 line-bot-sdk
