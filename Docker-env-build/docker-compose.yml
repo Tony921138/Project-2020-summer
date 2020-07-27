@@ -29,38 +29,67 @@ services:
     hostname: jupyter
     restart: unless-stopped
     ports:
+      - "5000:5000"
       - "8888:8888"
     command: start-notebook.sh --NotebookApp.token=''
     volumes:
       - ./jupyter:/home/jovyan/work
   
-  hadoop:
-    image: orozcohsu/ha-sp-zo-hi-fl-rs-ma-sq:v1
-    container_name: hadoop
-    hostname: master
-    expose:
-      - "50070"
-      - "9000"
-      - "8080"
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-namenode
+    restart: always
     ports:
-      - "8080:8080"
-      - "50070:50070"
-      - "9000:9000"
-      - "2222:22"
-      - "28080:28080"
-      - "18080:18080"
-      - "10000:10000"
-      - "10002:10002"
-      - "9083:9083"
-      - "3306:3306"
+      - 9870:9870
+      - 9000:9000
     volumes:
-      - /tmp/docker-cluster-hadoop-name/:/data/dfs/name/
-      - /tmp/docker-cluster-hadoop-data/:/data/dfs/data/
-      - /tmp/docker-cluster-hadoop-logs/:/usr/local/hadoop/logs/
-      - /tmp/docker-cluster-zookeeper-logs/:/var/log/zookeeper/
-      - /tmp/docker-cluster-zeppelin-logs/:/usr/local/zeppelin/log
+      - hadoop_namenode:/hadoop/dfs/name
     environment:
-      - "NODE_TYPE=master"
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-datanode
+    restart: always
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000"
+    env_file:
+      - ./hadoop.env
+  
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    container_name: yarn-resourcemanager
+    restart: always
+    ports:
+      - 8088:8088
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
+    env_file:
+      - ./hadoop.env
+
+  nodemanager1:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    container_name: yarn-nodemanager
+    restart: always
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+    env_file:
+      - ./hadoop.env
+  
+  historyserver:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    container_name: yarn-historyserver
+    restart: always
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+    volumes:
+      - hadoop_historyserver:/hadoop/yarn/timeline
+    env_file:
+      - ./hadoop.env
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.1
@@ -80,6 +109,7 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
