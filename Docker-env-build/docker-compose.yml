@@ -107,8 +107,8 @@ services:
     command: >
       sh -c "export PYSPARK_PYTHON=/usr/bin/python3.7 && 
              export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
-    tty: true
-      
+    command: tail -F anything
+    
   spark-worker-1:
     image: bde2020/spark-worker:2.4.5-hadoop2.7
     container_name: spark-worker-1
@@ -122,7 +122,7 @@ services:
     command: >
       sh -c "export PYSPARK_PYTHON=/usr/bin/python3.7 && 
              export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
-    tty: true
+    command: tail -F anything
              
   spark-worker-2:
     image: bde2020/spark-worker:2.4.5-hadoop2.7
@@ -137,7 +137,7 @@ services:
     command: >
       sh -c "export PYSPARK_PYTHON=/usr/bin/python3.7 && 
              export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
-    tty: true
+    command: tail -F anything
     
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.1
