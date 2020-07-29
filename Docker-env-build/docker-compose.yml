@@ -94,7 +94,7 @@ services:
   spark-master:
     image: tonytony0123/sp-master
     container_name: spark-master
-    hostname: spark-master
+    hostname: master
     ports:
       - "8080:8080"
       - "7077:7077"
@@ -104,6 +104,10 @@ services:
     depends_on:
       - namenode
       - datanode
+    command: >
+      bash -c "export PYSPARK_PYTHON=/usr/bin/python3.7 &&
+               export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
+    command: tail -F /dev/null
     
   spark-worker-1:
     image: tonytony0123/sp-worker
@@ -115,6 +119,10 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    command: >
+      bash -c "export PYSPARK_PYTHON=/usr/bin/python3.7 &&
+               export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
+    command: tail -F /dev/null
       
   spark-worker-2:
     image: tonytony0123/sp-worker
@@ -126,6 +134,10 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    command: >
+      bash -c "export PYSPARK_PYTHON=/usr/bin/python3.7 &&
+               export PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
+    command: tail -F /dev/null
       
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.1
