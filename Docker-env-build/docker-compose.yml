@@ -44,6 +44,7 @@ services:
       - 9000:9000
     volumes:
       - ./hadoop/hadoop_namenode:/hadoop/dfs/name
+      - ./hadoop_data:/user_data
     environment:
       - CLUSTER_NAME=test
     env_file:
