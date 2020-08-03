@@ -1,7 +1,7 @@
 AI / BigData project
 ====
 
-MongoDB_Jupyter_Docker
+Docker environment setup
 ----
 1. git pull the whole repo
 2. cd to the Docker-env-build directory
