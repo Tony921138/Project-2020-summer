@@ -10,7 +10,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongodb:/data/db
+      - ./mongodb_data:/data/db
 
   adminmongo:
     image: mrvautin/adminmongo
@@ -33,7 +33,7 @@ services:
       - "8888:8888"
     command: start-notebook.sh --NotebookApp.token=''
     volumes:
-      - ./jupyter:/home/jovyan/work
+      - ./jupyter_data:/home/jovyan/work
   
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
