@@ -5,6 +5,7 @@ Docker environment setup
 ----
 1. git pull the whole repo
 2. cd to the Docker-env-build directory
+3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark
 3. type in 'docker-compose up -d' to start the service
-4. service include:
+4. services include:
    mongodb / adminmongo / jupyter notebook / hadoop / spark / kafka / zookeeper / ksql-server / ksql-cli
