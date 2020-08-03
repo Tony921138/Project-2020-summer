@@ -10,7 +10,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongodb:/data/db
+      - ./mongodb_data:/data/db
 
   adminmongo:
     image: mrvautin/adminmongo
@@ -33,9 +33,9 @@ services:
       - "8888:8888"
     command: start-notebook.sh --NotebookApp.token=''
     volumes:
-      - ./jupyter:/home/jovyan/work
+      - ./jupyter_data:/home/jovyan/work
   
-  hadoop-namenode:
+  namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     container_name: hadoop-namenode
     restart: always
@@ -43,23 +43,23 @@ services:
       - 50070:50070
       - 9000:9000
     volumes:
-      - ./hadoop/hadoop_namenode:/hadoop/dfs/name
+      - ./hadoop_conf/hadoop_namenode:/hadoop/dfs/name
       - ./hadoop_data:/user_data
     environment:
       - CLUSTER_NAME=test
     env_file:
-      - ./hadoop.env
+      - ./hadoop_env/hadoop.env
 
-  hadoop-datanode:
+  datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     container_name: hadoop-datanode
     restart: always
     volumes:
-      - ./hadoop/hadoop_datanode:/hadoop/dfs/data
+      - ./hadoop_conf/hadoop_datanode:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:50070"
     env_file:
-      - ./hadoop.env
+      - ./hadoop_env/hadoop.env
   
   spark-master:
     image: gettyimages/spark
@@ -105,7 +105,7 @@ services:
       - ./spark_conf/worker:/conf
       - ./spark_data:/tmp/data
     environment:
-      - SPARK_CONF_DIR: /spark_conf/conf
+      - SPARK_CONF_DIR: /conf
       - SPARK_WORKER_CORES: 2
       - SPARK_WORKER_MEMORY: 1g
       - SPARK_WORKER_PORT: 8881
