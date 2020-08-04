@@ -4,7 +4,7 @@ AI / BigData project
 Docker environment setup
 ----
 1. git pull the whole repo
-2. cd to the Docker-env-build directory
+2. cd into the Docker-env-build directory
 3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark
 3. type in 'docker-compose up -d' to start the service
 4. services include:
