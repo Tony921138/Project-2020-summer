@@ -179,6 +179,7 @@ services:
       context: ./dockerfile
       dockerfile: dockerfile-mysql
     container_name: mysql
+    hostname: mysql
     restart: always
     ports:
       - "3306:3306"
