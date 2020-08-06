@@ -1,4 +1,15 @@
 FROM jupyter/pyspark-notebook
 
 RUN pip install --upgrade pip
-RUN pip install pymongo requests bs4 kafka pyspark boto3 line-bot-sdk pymysql mysql-connector-python
+RUN pip install pymongo \
+                requests \
+                bs4 \
+                kafka-python \ 
+                pyspark \
+                boto3 \
+                line-bot-sdk \
+                pymysql \
+                mysql-connector-python \
+                elasticsearch \
+                python3-logstash \
+                
