@@ -57,7 +57,7 @@ services:
     volumes:
       - ./hadoop/hadoop_datanode:/hadoop/dfs/data
     environment:
-      SERVICE_PRECONDITION: "namenode:9870"
+      - SERVICE_PRECONDITION: "namenode:9870"
     env_file:
       - ./hadoop_env/hadoop.env
   
@@ -68,7 +68,7 @@ services:
     ports:
       - 8088:8088
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864"
+      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864"
     env_file:
       - ./hadoop_env/hadoop.env
 
@@ -77,7 +77,7 @@ services:
     container_name: yarn-nodemanager
     restart: always
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
+      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
     env_file:
       - ./hadoop_env/hadoop.env
   
@@ -86,7 +86,7 @@ services:
     container_name: yarn-historyserver
     restart: always
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
+      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
     volumes:
       - ./hadoop/yarn_historyserver:/hadoop/yarn/timeline
     env_file:
@@ -150,8 +150,8 @@ services:
     ports:
       - "2181:2181"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+      - ZOOKEEPER_CLIENT_PORT: "2181"
+      - ZOOKEEPER_TICK_TIME: "2000"
 
   kafka:
     image: confluentinc/cp-kafka:5.2.1
@@ -163,15 +163,29 @@ services:
       - "9092:9092"
       - "29092:29092"
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_BROKER_ID: "1"
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      - KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      - KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
       ## for local use
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      - KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
       ## for public use
       #KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://<host_ip>:9092
       #advertised.host.name: <host_ip>
-
-
+  
+  MySQL:
+    build:
+      context: ./dockerfile
+      dockerfile: dockerfile-mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE: "project"
+      - MYSQL_USER: "user"
+      - MYSQL_PASSWORD: "user"
+      - MYSQL_ROOT_PASSWORD: "root"
