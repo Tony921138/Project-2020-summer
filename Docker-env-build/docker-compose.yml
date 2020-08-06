@@ -6,9 +6,9 @@ services:
     hostname: mongodb
     restart: always
     expose:
-      - "6016" 
+      - 6016"
     ports:
-      - "27017:27017"
+      - 27017:27017
     volumes:
       - ./mongodb_data:/data/db
 
@@ -17,7 +17,7 @@ services:
     container_name: adminmongo
     hostname: adminmongo
     ports:
-      - "1234:1234"
+      - 1234:1234
     environment:
       - HOST=0.0.0.0
 
@@ -29,8 +29,8 @@ services:
     hostname: jupyter
     restart: unless-stopped
     ports:
-      - "5000:5000"
-      - "8888:8888"
+      - 5000:5000
+      - 8888:8888
     command: start-notebook.sh --NotebookApp.token=''
     volumes:
       - ./jupyter_data:/home/jovyan/work
@@ -97,9 +97,9 @@ services:
     container_name: spark-master
     hostname: spark-master
     ports:
-      - "8080:8080"
-      - "7077:7077"
-      - "4040:4040"
+      - 8080:8080
+      - 7077:7077
+      - 4040:4040
     volumes:
       - ./spark_data:/user_data
     environment:
@@ -116,7 +116,7 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -127,7 +127,7 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8082:8081"
+      - 8082:8081
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -138,7 +138,7 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8085:8081"
+      - 8085:8081
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -148,7 +148,7 @@ services:
     container_name: zookeeper
     hostname: zookeeper
     ports:
-      - "2181:2181"
+      - 2181:2181
     environment:
       - ZOOKEEPER_CLIENT_PORT: "2181"
       - ZOOKEEPER_TICK_TIME: "2000"
@@ -160,8 +160,8 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"
-      - "29092:29092"
+      - 9092:9092
+      - 29092:29092
     environment:
       - KAFKA_BROKER_ID: "1"
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
@@ -174,7 +174,7 @@ services:
       #KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://<host_ip>:9092
       #advertised.host.name: <host_ip>
   
-  MySQL:
+  mysql:
     build:
       context: ./dockerfile
       dockerfile: dockerfile-mysql
@@ -182,7 +182,7 @@ services:
     hostname: mysql
     restart: always
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
       - ./mysql_data:/var/lib/mysql
     environment:
@@ -191,4 +191,15 @@ services:
       - MYSQL_PASSWORD: "user"
       - MYSQL_ROOT_PASSWORD: "root"
       
-      
+  mysql-workbench:
+    image: linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - PUID: "1000"
+      - PGID: "1000"
+      - TZ: "Asia/Taipei"
