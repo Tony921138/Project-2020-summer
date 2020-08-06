@@ -29,8 +29,8 @@ services:
     hostname: jupyter
     restart: unless-stopped
     ports:
-      - 5000:5000
       - 8888:8888
+      - 5000:5000
     command: start-notebook.sh --NotebookApp.token=''
     volumes:
       - ./jupyter_data:/home/jovyan/work
