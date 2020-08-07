@@ -4,7 +4,9 @@ RUN pip install --upgrade pip
 RUN pip install pymongo \
                 requests \
                 bs4 \
-                kafka-python \ 
+                flask \
+                confluent_kafka \
+                pandas \
                 pyspark \
                 boto3 \
                 line-bot-sdk \
