@@ -13,4 +13,5 @@ RUN pip install pymongo \
                 pymysql \
                 mysql-connector-python \
                 elasticsearch \
-                python3-logstash
+                python3-logstash \
+                hdfs
