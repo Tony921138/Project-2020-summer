@@ -1,5 +1,7 @@
 FROM jupyter/pyspark-notebook
 
+USER root
+
 RUN pip install --upgrade pip
 RUN pip install pymongo \
                 requests \
