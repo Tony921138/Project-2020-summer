@@ -15,3 +15,5 @@ RUN pip install pymongo \
                 elasticsearch \
                 python3-logstash
                 
+RUN /bin/bash -c 'chmod 777 /home/jovyan/work'
+                
