@@ -2,16 +2,16 @@ FROM jupyter/pyspark-notebook
 
 RUN pip install --upgrade pip
 RUN pip install pymongo \
-                requests \
-                bs4 \
-                flask \
-                confluent_kafka \
-                pandas \
-                pyspark \
-                boto3 \
-                line-bot-sdk \
-                pymysql \
-                mysql-connector-python \
-                elasticsearch \
-                python3-logstash \
+  requests \
+  bs4 \
+  flask \
+  confluent_kafka \
+  pandas \
+  pyspark \
+  boto3 \
+  line-bot-sdk \
+  pymysql \
+  mysql-connector-python \
+  elasticsearch \
+  python3-logstash
                 
