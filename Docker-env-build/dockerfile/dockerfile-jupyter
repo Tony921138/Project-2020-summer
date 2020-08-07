@@ -13,7 +13,4 @@ RUN pip install pymongo \
                 pymysql \
                 mysql-connector-python \
                 elasticsearch \
-                python3-logstash
-                
-RUN /bin/bash -c 'chmod 777 /home/jovyan/work'
-                
+                python3-logstash                
