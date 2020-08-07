@@ -6,7 +6,7 @@ services:
     hostname: mongodb
     restart: always
     expose:
-      - 6016"
+      - 6016
     ports:
       - 27017:27017
     volumes:
@@ -59,7 +59,7 @@ services:
     volumes:
       - ./hadoop/hadoop_datanode:/hadoop/dfs/data
     environment:
-      - SERVICE_PRECONDITION: "namenode:9870"
+      - SERVICE_PRECONDITION=namenode:9870
     env_file:
       - ./hadoop_env/hadoop.env
   
@@ -70,7 +70,7 @@ services:
     ports:
       - 8088:8088
     environment:
-      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864"
+      - SERVICE_PRECONDITION=namenode:9870 namenode:9000 datanode:9864
     env_file:
       - ./hadoop_env/hadoop.env
 
@@ -79,7 +79,7 @@ services:
     container_name: yarn-nodemanager
     restart: always
     environment:
-      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
+      - SERVICE_PRECONDITION=namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088
     env_file:
       - ./hadoop_env/hadoop.env
   
@@ -88,7 +88,7 @@ services:
     container_name: yarn-historyserver
     restart: always
     environment:
-      - SERVICE_PRECONDITION: "namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088"
+      - SERVICE_PRECONDITION=namenode:9870 namenode:9000 datanode:9864 resourcemanager:8088
     volumes:
       - ./hadoop/yarn_historyserver:/hadoop/yarn/timeline
     env_file:
@@ -120,7 +120,7 @@ services:
     ports:
       - 8081:8081
     environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
+      - SPARK_MASTER=spark://spark-master:7077
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
       
   spark-worker-2:
@@ -131,7 +131,7 @@ services:
     ports:
       - 8082:8081
     environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
+      - SPARK_MASTER=spark://spark-master:7077
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
    
   spark-worker-3:
@@ -142,7 +142,7 @@ services:
     ports:
       - 8083:8081
     environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
+      - SPARK_MASTER=spark://spark-master:7077
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
      
   zookeeper:
@@ -152,8 +152,8 @@ services:
     ports:
       - 2181:2181
     environment:
-      - ZOOKEEPER_CLIENT_PORT: "2181"
-      - ZOOKEEPER_TICK_TIME: "2000"
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
 
   kafka:
     image: confluentinc/cp-kafka:5.2.1
@@ -165,13 +165,13 @@ services:
       - 9092:9092
       - 29092:29092
     environment:
-      - KAFKA_BROKER_ID: "1"
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
-      - KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      - KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+      - KAFKA_BROKER_ID=1
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       ## for local use
-      - KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
       ## for public use
       #KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://<host_ip>:9092
       #advertised.host.name: <host_ip>
@@ -188,10 +188,10 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE: "project"
-      - MYSQL_USER: "user"
-      - MYSQL_PASSWORD: "user"
-      - MYSQL_ROOT_PASSWORD: "root"
+      - MYSQL_DATABASE=project
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_ROOT_PASSWORD=root
       
   mysql-workbench:
     image: linuxserver/mysql-workbench:latest
@@ -202,6 +202,6 @@ services:
     cap_add:
       - IPC_LOCK
     environment:
-      - PUID: "1000"
-      - PGID: "1000"
-      - TZ: "Asia/Taipei"
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Taipei
