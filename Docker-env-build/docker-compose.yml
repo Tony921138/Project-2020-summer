@@ -22,7 +22,9 @@ services:
       - HOST=0.0.0.0
 
   jupyter:
-    image: tonytony0123/jupyter
+    build:
+      context: ./dockerfile
+      dockerfile: dockerfile-jupyter
     container_name: jupyter
     hostname: jupyter
     restart: unless-stopped
