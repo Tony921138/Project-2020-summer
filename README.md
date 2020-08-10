@@ -13,5 +13,4 @@ Docker environment setup
    directory to allow access
 
 ## Raw data storage
-## ----
 
