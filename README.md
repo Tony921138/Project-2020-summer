@@ -13,7 +13,7 @@ Docker environment setup
    directory to allow access
 
 ## Data storage corresponding folders
-### mkdir independent folders in jupyter_data for distinct data input (folder name: '... data')
+### mkdir independent folders in jupyter_data for distinct data input
 1. hdfs:
    - hadoop_data (hadoop fs -put) / jupyter_data (use hadoop codes)
 2. mongodb:
