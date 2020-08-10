@@ -10,7 +10,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongodb_data:/data/db
+      - ./mongodb:/data/db
 
   adminmongo:
     image: mrvautin/adminmongo
@@ -191,7 +191,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./mysql_data:/user_data
+      - ./mysql:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=project
       - MYSQL_USER=user
