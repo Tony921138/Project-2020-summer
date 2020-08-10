@@ -21,4 +21,4 @@ Docker environment setup
 3. spark:
    - jupyter_data (.ipynb codes) / spark_data (use spark-submit commands)
 4. mysql:
-   - jupyter_data (use pymysql codes)
+   - jupyter_data (use pymysql codes) / mysql_data (use sql commands)
