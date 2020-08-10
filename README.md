@@ -12,5 +12,13 @@ Docker environment setup
 5. it would be best to chmod all '...data' directories (hadoop_data, jupyter_data ...) in your local
    directory to allow access
 
-## Raw data storage
-
+## Data storage corresponding folders
+### mkdir independent folders in jupyter_data for distinct data input (folder name: '... data')
+1. hdfs:
+   - hadoop_data (hadoop fs -put) / jupyter_data (use hadoop codes)
+2. mongodb:
+   - jupyter_data (use pymongo codes)
+3. spark:
+   - jupyter_data (.ipynb codes) / spark_data (use spark-submit commands)
+4. mysql:
+   - jupyter_data (use pymysql codes)
