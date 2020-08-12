@@ -22,3 +22,12 @@ Docker environment setup
    - jupyter_data (.ipynb codes) / spark_data (use spark-submit commands)
 4. mysql:
    - jupyter_data (use pymysql codes) / mysql_data (use sql commands)
+
+## ELK data corresponding folders
+1. put your pipeline .conf files in /ELK_data/logstash/ls_pipeline
+2. put index templates in /ELK_data/logstash/ls_template
+3. put data in /ELK_data/logstash/ls_data (csv files)
+4. put graph settings (.ndjson files) in local machine's folder for kibana import usage 
+### ES access and LS pipelines
+1. give access to es_data
+2. vi /ELK_data/logstash/ls_config/pipelines.yml (config your own pipeline)
