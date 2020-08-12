@@ -220,12 +220,8 @@ services:
     ports:
       - 9200:9200
     volumes:
-      - type: bind
-        source: ./elk_config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-      - type: volume
-        source: ./elk_data/elasticsearch/es_data
-        target: /usr/share/elasticsearch/data
+      - ./elk_data/elk_config/es:/usr/share/elasticsearch/config
+      - ./elk_data/elasticsearch/es_data:/usr/share/elasticsearch/data
     environment:
       - cluster.name=es-docker-cluster
       - node.name=node1
@@ -249,12 +245,9 @@ services:
       - 5001:5000/tcp
       - 9600:9600
     volumes:
-      - type: bind
-        source: ./elk_config/logstash.yml
-        target: /usr/share/logstash/config/logstash.yml
+      - ./elk_data/elk_config/ls:/usr/share/logstash/config   
       - ./elk_data/logstash/ls_data:/usr/share/logstash/data
       - ./elk_data/logstash/ls_template:/usr/share/logstash/template
-      - ./elk_data/logstash/ls_config:/usr/share/logstash/config
       - ./elk_data/logstash/ls_pipeline:/usr/share/logstash/pipeline
       - ./elk_data/logstash/ls_scripts:/user_script
       #- ./elk_data/logstash/ls_logs:/usr/share/logstash/logs:rw
@@ -270,9 +263,7 @@ services:
     ports:
       - 5601:5601
     volumes:
-      - type: bind
-        source: ./elk_config/kibana.yml
-        target: /usr/share/kibana/config/kibana.yml
+      - ./elk_data/elk_config/ki:/usr/share/kibana/config
     environment:
       - SERVER_NAME=kibana_server
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
