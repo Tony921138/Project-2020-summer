@@ -219,6 +219,7 @@ services:
     restart: unless-stopped
     ports:
       - 9200:9200
+      - 9300:9300
     volumes:
       - ./elk_data/elk_config/es:/usr/share/elasticsearch/config
       - ./elk_data/elasticsearch/es_data:/usr/share/elasticsearch/data
