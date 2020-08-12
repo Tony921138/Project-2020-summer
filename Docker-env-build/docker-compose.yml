@@ -232,7 +232,6 @@ services:
         soft: -1
         hard: -1
 
-
   logstash:
     image: docker.elastic.co/logstash/logstash:7.8.0
     container_name: logstash
