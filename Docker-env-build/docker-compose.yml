@@ -246,7 +246,7 @@ services:
     volumes:
       - ./ELK_data/logstash/ls_data:/usr/share/logstash/data
       - ./ELK_data/logstash/ls_template:/usr/share/logstash/template
-      - ./ELK_data/logstash/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./ELK_data/logstash/ls_config:/usr/share/logstash/config
       - ./ELK_data/logstash/ls_pipeline:/usr/share/logstash/pipeline
       - ./ELK_data/logstash/ls_scripts:/user_script
       #- ./ELK_data/logstash/ls_logs:/usr/share/logstash/logs:rw
