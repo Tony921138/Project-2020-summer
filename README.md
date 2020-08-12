@@ -24,11 +24,11 @@ Docker environment setup
    - jupyter_data (use pymysql codes) / mysql_data (use sql commands / source .sql files from here)
 
 ## ELK data corresponding folders
-1. put your pipeline .conf files in /ELK_data/logstash/ls_pipeline
-2. put index templates in /ELK_data/logstash/ls_template
-3. put data in /ELK_data/logstash/ls_data (csv files)
+1. put your pipeline .conf files in /elk_data/logstash/ls_pipeline
+2. put index templates in /elk_data/logstash/ls_template
+3. put data in /elk_data/logstash/ls_data (csv files)
 4. put graph settings (.ndjson files) in local machine's folder for kibana import usage
-5. put shell scripts in /ELK_data/logstash/ls_scripts for importing or deleting data in logstash
+5. put shell scripts in /elk_data/logstash/ls_scripts for importing or deleting data in logstash
 ### ES access and LS pipelines
-1. give access to es_data
-2. vi /ELK_data/logstash/ls_config/pipelines.yml (config your own pipeline)
+1. give access to es_data (chmod)
+2. vi /elk_data/logstash/ls_config/pipelines.yml (config your own pipeline)
