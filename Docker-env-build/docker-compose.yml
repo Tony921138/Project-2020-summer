@@ -220,7 +220,12 @@ services:
     ports:
       - 9200:9200
     volumes:
-      - ./ELK_data/elasticsearch/es_data:/usr/share/elasticsearch/data
+      - type: bind
+        source: ./ELK_config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+      - type: volume
+        source: ./ELK_data/elasticsearch/es_data
+        target: /usr/share/elasticsearch/data
     environment:
       - cluster.name=es-docker-cluster
       - node.name=node1
@@ -241,8 +246,12 @@ services:
     restart: always
     ports:
       - 5001:5000/udp
+      - 5001:5000/tcp
       - 9600:9600
     volumes:
+      - type: bind
+        source: ./ELK_config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
       - ./ELK_data/logstash/ls_data:/usr/share/logstash/data
       - ./ELK_data/logstash/ls_template:/usr/share/logstash/template
       - ./ELK_data/logstash/ls_config:/usr/share/logstash/config
@@ -260,6 +269,10 @@ services:
       - elasticsearch
     ports:
       - 5601:5601
+    volumes:
+      - type: bind
+        source: ./ELK_config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
     environment:
       - SERVER_NAME=kibana_server
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
