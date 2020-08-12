@@ -221,10 +221,10 @@ services:
       - 9200:9200
     volumes:
       - type: bind
-        source: ./ELK_config/elasticsearch.yml
+        source: ./elk_config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
       - type: volume
-        source: ./ELK_data/elasticsearch/es_data
+        source: ./elk_data/elasticsearch/es_data
         target: /usr/share/elasticsearch/data
     environment:
       - cluster.name=es-docker-cluster
@@ -250,14 +250,14 @@ services:
       - 9600:9600
     volumes:
       - type: bind
-        source: ./ELK_config/logstash.yml
+        source: ./elk_config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
-      - ./ELK_data/logstash/ls_data:/usr/share/logstash/data
-      - ./ELK_data/logstash/ls_template:/usr/share/logstash/template
-      - ./ELK_data/logstash/ls_config:/usr/share/logstash/config
-      - ./ELK_data/logstash/ls_pipeline:/usr/share/logstash/pipeline
-      - ./ELK_data/logstash/ls_scripts:/user_script
-      #- ./ELK_data/logstash/ls_logs:/usr/share/logstash/logs:rw
+      - ./elk_data/logstash/ls_data:/usr/share/logstash/data
+      - ./elk_data/logstash/ls_template:/usr/share/logstash/template
+      - ./elk_data/logstash/ls_config:/usr/share/logstash/config
+      - ./elk_data/logstash/ls_pipeline:/usr/share/logstash/pipeline
+      - ./elk_data/logstash/ls_scripts:/user_script
+      #- ./elk_data/logstash/ls_logs:/usr/share/logstash/logs:rw
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     
@@ -271,7 +271,7 @@ services:
       - 5601:5601
     volumes:
       - type: bind
-        source: ./ELK_config/kibana.yml
+        source: ./elk_config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
     environment:
       - SERVER_NAME=kibana_server
