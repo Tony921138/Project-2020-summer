@@ -224,10 +224,10 @@ services:
       - ./elk_data/elasticsearch/es_data:/usr/share/elasticsearch/data
     environment:
       - cluster.name=es-docker-cluster
-      - node.name=node1
+      - node.name=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms384m -Xmx384m"
-      - cluster.initial_master_nodes=node1
+      - cluster.initial_master_nodes=elasticsearch
     ulimits:
       memlock:
         soft: -1
@@ -267,3 +267,4 @@ services:
     environment:
       - SERVER_NAME=kibana_server
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
