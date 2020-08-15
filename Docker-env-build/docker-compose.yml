@@ -221,14 +221,13 @@ services:
       - 9200:9200
       - 9300:9300
     volumes:
-      - ./elk_data/elk_config/es:/usr/share/elasticsearch/config
-      - ./elk_data/elasticsearch/es_data:/usr/share/elasticsearch/data
+      - ./elk_data/es/es_data:/usr/share/elasticsearch/data
     environment:
       - cluster.name=es-docker-cluster
-      - node.name=elasticsearch
+      - node.name=node1
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms384m -Xmx384m"
-      - cluster.initial_master_nodes=elasticsearch
+      - cluster.initial_master_nodes=node1
     ulimits:
       memlock:
         soft: -1
@@ -246,12 +245,12 @@ services:
       - 5001:5000/tcp
       - 9600:9600
     volumes:
-      - ./elk_data/elk_config/ls:/usr/share/logstash/config   
-      - ./elk_data/logstash/ls_data:/usr/share/logstash/data
-      - ./elk_data/logstash/ls_template:/usr/share/logstash/template
-      - ./elk_data/logstash/ls_pipeline:/usr/share/logstash/pipeline
-      - ./elk_data/logstash/ls_scripts:/user_script
-      #- ./elk_data/logstash/ls_logs:/usr/share/logstash/logs:rw
+      - ./elk_data/ls/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml   
+      - ./elk_data/ls/ls_data:/usr/share/logstash/data
+      - ./elk_data/ls/ls_template:/usr/share/logstash/template
+      - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline
+      - ./elk_data/ls/ls_scripts:/user_script
+      #- ./elk_data/logstash/ls_logs:/usr/share/logstash/logs
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     
@@ -263,9 +262,6 @@ services:
       - elasticsearch
     ports:
       - 5601:5601
-    volumes:
-      - ./elk_data/elk_config/ki:/usr/share/kibana/config
     environment:
       - SERVER_NAME=kibana_server
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
