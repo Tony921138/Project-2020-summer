@@ -245,12 +245,12 @@ services:
       - 5001:5000/tcp
       - 9600:9600
     volumes:
-      - ./elk_data/ls/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml   
-      - ./elk_data/ls/ls_data:/usr/share/logstash/data
-      - ./elk_data/ls/ls_template:/usr/share/logstash/template
-      - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline
+      - ./elk_data/ls/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro  
+      - ./elk_data/ls/ls_data:/usr/share/logstash/data:rw
+      - ./elk_data/ls/ls_template:/usr/share/logstash/template:ro
+      - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline:ro
       - ./elk_data/ls/ls_scripts:/user_scripts
-      #- ./elk_data/ls/ls_logs:/usr/share/logstash/logs
+      #- ./elk_data/ls/ls_logs:/usr/share/logstash/logs:ro
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     
