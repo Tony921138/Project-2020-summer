@@ -32,5 +32,5 @@ Docker environment setup
 4. put graph settings (.ndjson files) in local machine's folder for kibana import usage
 5. put shell scripts in /elk_data/logstash/ls_scripts for importing or deleting data in logstash
 ### ES access and LS pipelines
-1. give access to elk_data/elasticsearch/es_data (chmod)
+1. give access to elk_data/elasticsearch/es_data (chmod) after 'docker-compose up -d'
 2. vi /elk_data/logstash/ls_config/pipelines.yml (config your own pipeline)
