@@ -12,6 +12,8 @@ Docker environment setup
 5. it would be best to chmod all '...data' directories (hadoop_data, jupyter_data ...) in your local
    directory to allow access
 
+![image](https://github.com/Tony921138/Project-2020-summer/blob/master/access.gif)
+
 ## Data storage corresponding folders
 ### mkdir independent folders in jupyter_data for distinct data input
 1. hdfs:
