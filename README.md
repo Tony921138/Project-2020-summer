@@ -9,8 +9,7 @@ Docker environment setup
 3. type in 'docker-compose up -d' to start the service
 4. services include:
    mongodb / adminmongo / jupyter notebook / hadoop / spark / kafka / zookeeper / ksql-server / ksql-cli
-5. it would be best to chmod all '...data' directories (hadoop_data, jupyter_data ...) in your local
-   directory to allow access (as shown below)
+5. it would be best to chmod all '\_data' directories (hadoop_data, jupyter_data, elk_data/ls/ls_data...) in your local directory to allow access (as shown below)
 
 ![image](https://github.com/Tony921138/Project-2020-summer/blob/master/Permit.gif)
 
@@ -24,13 +23,16 @@ Docker environment setup
    - jupyter_data (.ipynb codes) / spark_data (use spark-submit commands)
 4. mysql:
    - jupyter_data (use pymysql codes) / mysql_data (use sql commands / source .sql files from here)
+5. ELK:
+   - elk_data/ls/ls_data (csv files)
 
-## ELK data corresponding folders
-1. put your pipeline .conf files in /elk_data/logstash/ls_pipeline
-2. put index templates in /elk_data/logstash/ls_template
-3. put data in /elk_data/logstash/ls_data (csv files)
-4. put graph settings (.ndjson files) in local machine's folder for kibana import usage
-5. put shell scripts in /elk_data/logstash/ls_scripts for importing or deleting data in logstash
-### ES access and LS pipelines
-1. give access to elk_data/elasticsearch/es_data (chmod) after 'docker-compose up -d'
-2. vi /elk_data/logstash/ls_config/pipelines.yml (config your own pipeline)
+## ELK settings corresponding folders
+1. put your pipeline .conf files in elk_data/ls/ls_pipeline (conf file for different pipelines)
+2. put index templates in elk_data/ls/ls_template (json file)
+3. put data in elk_data/logstash/ls_data (csv files)
+4. edit elk_data/ls/ls_config/pipelines.yml for different pipeline settings
+5. put graph settings (.ndjson files) in local directory for kibana import usage
+6. put shell scripts in elk_data/ls/ls_scripts for importing or deleting data in logstash
+
+### ES access
+1. give access to elk_data/es/es_data (chmod) after 'docker-compose up -d'
