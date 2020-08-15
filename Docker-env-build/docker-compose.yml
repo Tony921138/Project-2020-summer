@@ -249,7 +249,7 @@ services:
       - ./elk_data/ls/ls_data:/usr/share/logstash/data
       - ./elk_data/ls/ls_template:/usr/share/logstash/template
       - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline
-      - ./elk_data/ls/ls_scripts:/user_script
+      - ./elk_data/ls/ls_scripts:/user_scripts
       #- ./elk_data/ls/ls_logs:/usr/share/logstash/logs
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
