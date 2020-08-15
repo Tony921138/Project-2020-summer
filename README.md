@@ -10,7 +10,7 @@ Docker environment setup
 4. services include:
    mongodb / adminmongo / jupyter notebook / hadoop / spark / kafka / zookeeper / ksql-server / ksql-cli
 5. it would be best to chmod all '...data' directories (hadoop_data, jupyter_data ...) in your local
-   directory to allow access
+   directory to allow access (as shown below)
 
 ![image](https://github.com/Tony921138/Project-2020-summer/blob/master/Permit.gif)
 
