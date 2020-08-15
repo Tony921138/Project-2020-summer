@@ -36,3 +36,9 @@ Docker environment setup
 
 ### ES access
 - give access to elk_data/es/es_data (chmod) after 'docker-compose up -d'
+
+### Connecting ES to Jupyter
+- before establishing connection, type in commands listed below to open up port 9200
+  - firewall-cmd --zone=public --add-port=9200/tmp --permanent
+  - firewall-cmd --reload
+  - firewall-cmd --list-ports
