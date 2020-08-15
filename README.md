@@ -27,8 +27,8 @@ Docker environment setup
    - elk_data/ls/ls_data (csv files)
 
 ## ELK settings corresponding folders
-1. put your pipeline .conf files in elk_data/ls/ls_pipeline (conf file for different pipelines)
-2. put index templates in elk_data/ls/ls_template (json file)
+1. put pipeline .conf files in elk_data/ls/ls_pipeline (conf file for different pipelines)
+2. put index templates in elk_data/ls/ls_template (json files)
 3. put data in elk_data/logstash/ls_data (csv files)
 4. edit elk_data/ls/ls_config/pipelines.yml for different pipeline settings
 5. put graph settings (.ndjson files) in local directory for kibana import usage
