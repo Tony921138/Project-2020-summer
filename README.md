@@ -35,4 +35,4 @@ Docker environment setup
 6. put shell scripts in elk_data/ls/ls_scripts for importing or deleting data in logstash
 
 ### ES access
-1. give access to elk_data/es/es_data (chmod) after 'docker-compose up -d'
+- give access to elk_data/es/es_data (chmod) after 'docker-compose up -d'
