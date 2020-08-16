@@ -2,7 +2,7 @@
 
 ## Docker environment setup on two VMs
 
-1. git pull the whole repo on vm1 and vm2
+1. git clone the whole repo onto vm1 and vm2
 2. cd into Docker-main on vm1 and Docker-elk on vm2 
 3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark in vm1 (vi docker-compose.yml)
 3. type in 'docker-compose up -d' to start services in both vms
