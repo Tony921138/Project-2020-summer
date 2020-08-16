@@ -223,7 +223,7 @@ services:
     volumes:
       - ./elk_data/es/es_data:/usr/share/elasticsearch/data
     environment:
-      - cluster.name=es-docker-cluster
+      - cluster.name=docker-cluster
       - node.name=node1
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms384m -Xmx384m"
