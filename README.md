@@ -39,6 +39,6 @@ Docker environment setup
 
 ### Connecting ES to Jupyter
 - before establishing connection, type in commands listed below to open up port 9200
-  - firewall-cmd --zone=public --add-port=9200/tmp --permanent
+  - firewall-cmd --zone=public --add-port=9200/tcp --permanent
   - firewall-cmd --reload
   - firewall-cmd --list-ports
