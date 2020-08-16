@@ -14,7 +14,7 @@ services:
       - cluster.name=docker-cluster
       - node.name=node1
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms384m -Xmx384m"
+      - ES_JAVA_OPTS="-Xms384m -Xmx384m"
       - cluster.initial_master_nodes=node1
     ulimits:
       memlock:
@@ -33,14 +33,14 @@ services:
       - 5001:5000/tcp
       - 9600:9600
     volumes:
-      - ./elk_data/ls/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro  
+      #- ./elk_data/ls/ls_config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro  
       - ./elk_data/ls/ls_data:/usr/share/logstash/data:rw
       - ./elk_data/ls/ls_template:/usr/share/logstash/template:ro
       - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline:ro
       - ./elk_data/ls/ls_scripts:/user_scripts
       #- ./elk_data/ls/ls_logs:/usr/share/logstash/logs:ro
     environment:
-      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+      - LS_JAVA_OPTS="-Xmx256m -Xms256m"
     
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:7.8.0
