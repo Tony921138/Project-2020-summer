@@ -1,11 +1,11 @@
 # AI / BigData project
 
-## Docker environment setup on two VMs
+## Docker environment setup
 
-1. git clone the whole repo onto vm1 and vm2
-2. cd into Docker-main on vm1 and Docker-elk on vm2 
-3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark in vm1 (vi docker-compose.yml)
-3. type in 'docker-compose up -d' to start services in both vms
+1. git clone the whole repo
+2. cd into Docker-main
+3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark
+3. type in 'docker-compose up -d' to start services
 4. services include:
    mongodb / adminmongo / jupyter notebook / hadoop / yarn / spark / kafka / zookeeper / mysql / mysql-workbench / ELK stack
 5. it would be best to chmod all '\_data' directories (hadoop_data, jupyter_data in vm1, elk_data/es/es_data in vm2...) in your local directory to allow access (as shown below)
