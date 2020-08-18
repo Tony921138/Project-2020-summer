@@ -211,3 +211,94 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Taipei
+
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.8.0
+    container_name: es01
+    hostname: es01
+    restart: unless-stopped
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./elk_data/es/es01_data:/usr/share/elasticsearch/data
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es02,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+        
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.8.0
+    container_name: es02
+    restart: unless-stopped
+    volumes:
+      - ./elk_data/es/es02_data:/usr/share/elasticsearch/data
+    environment:
+      - node.name=es02
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+        
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.8.0
+    container_name: es03
+    restart: unless-stopped
+    volumes:
+      - ./elk_data/es/es03_data:/usr/share/elasticsearch/data
+    environment:
+      - node.name=es03
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es02
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:7.8.0
+    container_name: logstash
+    hostname: logstash
+    depends_on:
+      - es01
+    restart: always
+    ports:
+      - 5001:5000/udp
+      - 5001:5000/tcp
+      - 9600:9600
+    volumes:
+      - ./elk_data/ls/ls_config:/usr/share/logstash/config  
+      - ./elk_data/ls/ls_data:/usr/share/logstash/data:rw
+      - ./elk_data/ls/ls_template:/usr/share/logstash/template:ro
+      - ./elk_data/ls/ls_pipeline:/usr/share/logstash/pipeline:ro
+      - ./elk_data/ls/ls_scripts:/user_scripts
+      #- ./elk_data/ls/ls_logs:/usr/share/logstash/logs:ro
+    environment:
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+    
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:7.8.0
+    container_name: kibana
+    hostname: kibana
+    depends_on:
+      - es01
+    ports:
+      - 5601:5601
+    environment:
+      - SERVER_NAME=kibana_server
+      - ELASTICSEARCH_HOSTS=http://es01:9200
