@@ -7,7 +7,7 @@
 3. Be sure to commit yarn related services (resourcemanager, nodemanager, historyserver) before starting spark
 3. type in 'docker-compose up -d' to start services
 4. services include:
-   mongodb / adminmongo / jupyter notebook / hadoop / yarn / spark / kafka / zookeeper / mysql / mysql-workbench / ELK stack
+   mongodb / adminmongo / jupyter notebook / hadoop / yarn / spark / kafka / zookeeper / mysql / mysql-workbench / ELK stack / ngrok
 5. it would be best to chmod all '\_data' directories (hadoop_data, jupyter_data, elk_data/es/es_data...) in your local directory to allow access (as shown below)
 
 ![image](https://github.com/Tony921138/Project-2020-summer/blob/master/Permit.gif)
