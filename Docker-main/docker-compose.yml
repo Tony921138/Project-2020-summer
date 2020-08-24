@@ -34,15 +34,8 @@ services:
     ports:
       - 8888:8888
       - 5000:5000
-    user: root
     volumes:
-      - ./jupyter_data:/home/user/project
-    working_dir: /home/user/project
-    environment:
-      - NB_USER=user
-      - NB_GID=1000
-      - CHOWN_HOME=yes
-      - CHOWN_HOME_OPTS=-R
+      - ./jupyter_data:/home/jovyan/work
   
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
