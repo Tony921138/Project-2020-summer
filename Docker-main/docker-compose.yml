@@ -36,7 +36,7 @@ services:
       - 5000:5000
     user: root
     volumes:
-      - ./jupyter_data:/home/jovyan/work
+      - ./jupyter_data:/home/user/project
     working_dir: /home/user/project
     environment:
       - NB_USER=user
