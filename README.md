@@ -41,3 +41,20 @@
   - firewall-cmd --zone=public --add-port=9200/tcp --permanent
   - firewall-cmd --reload
   - firewall-cmd --list-ports
+
+## Docker security env settings
+1. mongodb / mysql 
+  - before adding you files into the corresponding folders, please change the user name and password for mongodb and mysql
+  - connect to mysql by using mysql workbench 
+    - connection name: <connection_name>
+    - hostname: <mysql_container_name>
+    - port: <mysql_container_connection_port>
+    - username: <your_username>
+    - password: <your_password>
+  - connect to mongodb by using adminmongo
+    - connection name: <connection_name>
+    - connection string: <mongodb://<username>:<password>@<mongodb_container_name>:<mongodb_connection_port>>
+2. jupyter notebook
+   - use "docker exec -it jupyter bash" to get into the container
+   - use "jupyter notebook list" to get your token
+   - input your token at http://<vm_ip>:8888
