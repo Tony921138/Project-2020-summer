@@ -12,7 +12,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=user
-      - MONGO_INITDB_DATABASE=project
     volumes:
       - ./mongodb:/data/db
 
